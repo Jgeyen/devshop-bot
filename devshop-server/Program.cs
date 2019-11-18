@@ -18,7 +18,7 @@ namespace devshop_server {
             
             CreateHostBuilder(args).Build().Run();
         }
-
+//Help
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder => {

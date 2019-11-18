@@ -78,11 +78,11 @@ namespace devshop_server {
         public bool CanUpgradeTest { get; private set; }
         public bool CanUpgradeBa { get; private set; }
 
-        private WorkerPool _workers;
-        private KanbanBoard _board;
-        private Store _store;
+        private IWorkerPool _workers;
+        private IKanbanBoard _board;
+        private IStore _store;
         private static int loopCount = 0;
-        public State(WorkerPool workers, KanbanBoard board, Store store) {
+        public State(IWorkerPool workers, IKanbanBoard board, IStore store) {
             _workers = workers;
             _board = board;
             _store = store;

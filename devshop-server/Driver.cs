@@ -7,6 +7,8 @@ using OpenQA.Selenium.Chrome;
 
 namespace devshop_server {
     public interface IDriver {
+        ChromeDriver CDriver { get; }
+
         void ClickItem(By by);
         void Dispose();
         string GetElementAttributeText(By by, string attribute);
@@ -20,7 +22,7 @@ namespace devshop_server {
         private const string skillsSelector = "div.skills>span.skill";
 
         private const int retries = 3;
-        public ChromeDriver CDriver;
+        public ChromeDriver CDriver { get; }
 
         public Driver(ChromeDriver driver) {
             CDriver = driver;

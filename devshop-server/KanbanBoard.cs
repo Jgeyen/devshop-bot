@@ -52,8 +52,8 @@ namespace devshop_server {
 
     public class Story {
         private string _id;
-        private Driver _driver;
-        public Story(string id, Driver driver) {
+        private IDriver _driver;
+        public Story(string id, IDriver driver) {
             _id = id;
             _driver = driver;
         }

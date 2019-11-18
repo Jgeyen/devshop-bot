@@ -13,6 +13,7 @@ namespace devshop_server {
     }
 
     public interface IWorkerPool {
+        List<Worker> Workers { get; }
         Worker GetIdleWorker(WorkerTypes type);
         int GetLowestSkillLevelForWorker(WorkerTypes type);
         Worker GetLowestSkillWorker(WorkerTypes type);
@@ -21,11 +22,12 @@ namespace devshop_server {
     }
 
     public class WorkerPool : IWorkerPool {
-        public List<Worker> Workers = new List<Worker>();
+        public List<Worker> Workers { get; private set; }
         private IDriver _driver;
 
         public WorkerPool(IDriver driver) {
             _driver = driver;
+            Workers = new List<Worker>();
         }
 
         public void UpdateWorkers() {
@@ -75,7 +77,7 @@ namespace devshop_server {
     }
 
     public class Worker {
-        private Driver _driver = null;
+        private IDriver _driver = null;
         private List<Skill> _skillz;
         public string Id;
         public int SkillLevel => _skillz.FirstOrDefault(s => s.Type == (Skill.SkillType)Type)?.Level ?? 0;
@@ -83,7 +85,7 @@ namespace devshop_server {
 
         public bool isFree => !_driver.GetElementAttributeText(By.Id(Id), "class").Contains("busy");
 
-        public Worker(string id, Driver driver) {
+        public Worker(string id, IDriver driver) {
             _driver = driver;
             Id = id;
 
