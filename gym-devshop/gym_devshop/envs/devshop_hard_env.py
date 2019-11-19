@@ -1,6 +1,6 @@
 import logging
 import math
-from bot.envs.devshop_env import DevshopEnv
+from gym_devshop.envs.devshop_env import DevshopEnv
 from gym import error
 
 try:
@@ -10,14 +10,14 @@ except ImportError as e:
 
 logger = logging.getLogger(__name__)
 
-class DevshopFoundOnlyEnv(DevshopEnv):
+class DevshopHardEnv(DevshopEnv):
     """
     SoccerEmptyGoal tasks the agent with approaching the ball,
     dribbling, and scoring a goal. Rewards are given as the agent nears
     the ball, kicks the ball towards the goal, and scores a goal.
     """
     def __init__(self):
-        super(DevshopFoundOnlyEnv, self).__init__()
+        super(DevshopHardEnv, self).__init__()
         self.old_ball_prox = 0
         self.old_kickable = 0
         self.old_ball_dist_goal = 0
@@ -79,4 +79,4 @@ class DevshopFoundOnlyEnv(DevshopEnv):
         self.old_ball_dist_goal = 0
         self.got_kickable_reward = False
         self.first_step = True
-        return super(DevshopFoundOnlyEnv, self)._reset()
+        return super(DevshopHardEnv, self)._reset()
