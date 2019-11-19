@@ -4,20 +4,20 @@ using System.Linq;
 
 namespace devshop_server {
     public interface IState {
-        int InboxStoryCount { get; }
-        int BacklogStoryCount { get; }
-        int DevStoryCount { get; }
-        int TestStoryCount { get; }
-        int DoneStoryCount { get; }
-        bool FounderFree { get; }
+        int InboxStoryCount { get; }//
+        int BacklogStoryCount { get; }//
+        int DevStoryCount { get; }//
+        int TestStoryCount { get; }//
+        int DoneStoryCount { get; }//
+        bool FounderFree { get; }//
         int DevsFree { get; }
         int TestersFree { get; }
         int BasFree { get; }
         int DevCount { get; }
         int TesterCount { get; }
         int BaCount { get; }
-        int Bank { get; }
-        int NewProjectCost { get; }
+        int Bank { get; }//
+        int NewProjectCost { get; }//
         int DevHireCost { get; }
         int TestHireCost { get; }
         int BaHireCost { get; }
