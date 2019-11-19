@@ -1,11 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using OpenQA.Selenium.Chrome;
 
 namespace devshop_server {
@@ -15,10 +10,10 @@ namespace devshop_server {
         public static Driver Driver;
         public static void Main(string[] args) {
             Driver = GetStarted();
-            
+
             CreateHostBuilder(args).Build().Run();
         }
-//Help
+        //Help
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder => {
