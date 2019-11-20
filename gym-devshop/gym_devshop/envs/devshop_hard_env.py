@@ -1,6 +1,7 @@
 import logging
 import math
 from gym_devshop.envs.devshop_env import DevshopEnv
+from gym_devshop.client import DevshopClient
 from gym import error
 
 try:

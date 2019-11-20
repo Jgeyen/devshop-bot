@@ -4,6 +4,7 @@ import gym
 from gym import spaces
 import pandas as pd
 import numpy as np
+from gym_devshop.client import DevshopClient
 
 import logging
 logger = logging.getLogger(__name__)
