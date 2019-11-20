@@ -19,24 +19,7 @@ namespace devshop_server.Controllers {
             _actions.AddProject();
             return Ok();
         }
-        [HttpPost]
-        [Route("DoBaWork")]
-        public IActionResult DoBaWork() {
-            _actions.DoBaWork();
-            return Ok();
-        }
-        [HttpPost]
-        [Route("DoDevWork")]
-        public IActionResult DoDevWork() {
-            _actions.DoDevWork();
-            return Ok();
-        }
-        [HttpPost]
-        [Route("DoTestWork")]
-        public IActionResult DoTestWork() {
-            _actions.DoTestWork();
-            return Ok();
-        }
+        
         [HttpPost]
         [Route("FounderDoBaWork")]
         public IActionResult FounderDoBaWork() {
@@ -53,6 +36,24 @@ namespace devshop_server.Controllers {
         [Route("FounderDoTestWork")]
         public IActionResult FounderDoTestWork() {
             _actions.FounderDoTestWork();
+            return Ok();
+        }
+        [HttpPost]
+        [Route("DoBaWork")]
+        public IActionResult DoBaWork() {
+            _actions.DoBaWork();
+            return Ok();
+        }
+        [HttpPost]
+        [Route("DoDevWork")]
+        public IActionResult DoDevWork() {
+            _actions.DoDevWork();
+            return Ok();
+        }
+        [HttpPost]
+        [Route("DoTestWork")]
+        public IActionResult DoTestWork() {
+            _actions.DoTestWork();
             return Ok();
         }
         [HttpPost]
