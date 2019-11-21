@@ -34,14 +34,7 @@ class DevshopEnv(gym.Env):
         # self.observation_space = spaces.Box(low=0, high=255, shape=
         #               (HEIGHT, WIDTH, N_CHANNELS), dtype=np.uint8)
 
-        self.observation_space = self.observation_space = spaces.Tuple((
-                                    spaces.Discrete(101),
-                                    spaces.Discrete(101),
-                                    spaces.Discrete(101),
-                                    spaces.Discrete(101),
-                                    spaces.Discrete(101),
-                                    spaces.Discrete(2),
-                                    spaces.Discrete(1001)))
+        self.observation_space =  spaces.Box(low=0, high=1, shape=(7,), dtype=np.float32)
 
     def _take_action(self, action):
         print(f'Step: {self.current_step}')
@@ -61,26 +54,26 @@ class DevshopEnv(gym.Env):
         client = DevshopClient()
         state = client.getState()
         self.bank = state.bank
-        self.inboxStoryCount = state.InboxStoryCount
-        self.backlogStoryCount = state.BacklogStoryCount
-        self.devStoryCount = state.DevStoryCount
-        self.testStoryCount = state.TestStoryCount
-        self.doneStoryCount = state.DoneStoryCount
-        self.founderFree = state.FounderFree
-        self.newProjectCost = state.NewProjectCost
+        self.inboxStoryCount = state.inboxStoryCount
+        self.backlogStoryCount = state.backlogStoryCount
+        self.devStoryCount = state.devStoryCount
+        self.testStoryCount = state.testStoryCount
+        self.doneStoryCount = state.doneStoryCount
+        self.founderFree = state.founderFree
+        self.newProjectCost = state.newProjectCost
 
-        reward = self.bank * delay_modifier
+        reward = (self.bank + 1000) 
         done = self.bank + 1000 <= 0 #discreet space can't handle negative, 1000 is going to be our y intercept
 
         
 
-        obs = (self.inboxStoryCount, 
-                self.backlogStoryCount,
-                self.devStoryCount,
-                self.testStoryCount,
-                self.doneStoryCount,
+        obs = np.array((self.inboxStoryCount/100, 
+                self.backlogStoryCount/100,
+                self.devStoryCount/100,
+                self.testStoryCount/100,
+                self.doneStoryCount/100,
                 self.founderFree,
-                self.newProjectCost)
+                self.newProjectCost/100))
 
         return obs, reward, done, {}
 

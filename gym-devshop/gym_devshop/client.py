@@ -55,7 +55,7 @@ class DevshopClient():
         print(myobj)
         return x
     def doReset(self):
-        requestUrl = api_url_base + URL_STATE
+        requestUrl = api_url_base + "game/reset"
         response = requests.get(requestUrl, verify=False)
         print(response.status_code)
         

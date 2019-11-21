@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using OpenQA.Selenium;
 
 namespace devshop_server {
@@ -17,6 +18,7 @@ namespace devshop_server {
 
         void GoToKanban();
         void GoToStore();
+        void ResetGame();
         void HireWorker(WorkerTypes type);
         bool IsStoreItemAvailable(WorkerTypes type);
         void PurchaseStoreItem(StoreItems item);
@@ -41,6 +43,12 @@ namespace devshop_server {
         }
         public void GoToKanban() {
             _driver.ClickItem(By.Id("closeStore"));
+        }
+        public void ResetGame() {
+            _driver.CDriver.Navigate().GoToUrl("https://secretgeek.github.io/devShop/");
+            Thread.Sleep(100);
+            _driver.CDriver.FindElementById("start").Click();
+            Thread.Sleep(100);
         }
         public int TotalMoneyAvailable => ExtractMoney(_driver.GetElementText(By.Id("money"))) ?? int.MinValue;
         public int NewProjectCost => ExtractMoney(_driver.GetElementText(By.Id("getLead"))) ?? int.MinValue;
