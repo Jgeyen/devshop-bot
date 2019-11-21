@@ -13,6 +13,35 @@ MAX_STEPS = 20000
 
 class DevshopClient():
 
+    #InboxStoryCount - simple 0-100
+    #BacklogStoryCount - simple 0-100
+    #DevStoryCount - simple 0-100
+    #TestStoryCount - simple 0-100
+    #DoneStoryCount - simple 0-100
+    #FounderFree - simple 0-1
+    #DevsFree
+    #TestersFree
+    #BasFree
+    #DevCount
+    #TesterCount
+    #BaCount
+    #Bank - simple 0-20000
+    #NewProjectCost - simple 0-1000
+    #DevHireCost
+    #TestHireCost
+    #BaHireCost
+    #DevUpgradeCost
+    #TestUpgradeCost
+    #BaUpgradeCost
+    #DevMinLevel
+    #TestMinLevel
+    #BaMinLevel
+    #CanHireDev
+    #CanHireTest
+    #CanHireBa
+    #CanUpgradeDev
+    #CanUpgradeTest
+    #CanUpgradeBa
     def getState(self):
         requestUrl = api_url_base + URL_STATE
         response = requests.get(requestUrl, verify=False)
@@ -24,7 +53,12 @@ class DevshopClient():
 
         print(x.bank)
         print(myobj)
-
+        return x
+    def doReset(self):
+        requestUrl = api_url_base + URL_STATE
+        response = requests.get(requestUrl, verify=False)
+        print(response.status_code)
+        
     def doAction(self, action):
         actions = ["AddProject",
                 "FounderDoBaWork",
