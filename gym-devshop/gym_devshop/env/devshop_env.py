@@ -36,6 +36,7 @@ class DevshopEnv(gym.Env):
 
         self.observation_space =  spaces.Box(low=0, high=1, shape=(7,), dtype=np.float32)
         self.lastBanks = []
+        self.lastInboxStoryCount=0
 
     def _take_action(self, action):
         print(f'Step: {self.current_step}')
@@ -57,11 +58,11 @@ class DevshopEnv(gym.Env):
         self.actionReward = 0
         if didAction:
             if action ==1:
-                self.actionReward = 1
-            if action ==2:
                 self.actionReward = 10
-            if action == 3:
+            if action ==2:
                 self.actionReward = 100
+            if action == 3:
+                self.actionReward = 1000
         self.bank = state.bank
         self.inboxStoryCount = state.inboxStoryCount
         self.backlogStoryCount = state.backlogStoryCount
@@ -72,8 +73,8 @@ class DevshopEnv(gym.Env):
         self.newProjectCost = state.newProjectCost
         
         # self.lastBanks.append(self.bank)
-        reward = self.actionReward
-
+        reward = self.actionReward - 2*(self.inboxStoryCount )
+        self.lastInboxStoryCount = self.inboxStoryCount
         done = self.bank + 10000 <= 0 #discreet space can't handle negative, 1000 is going to be our y intercept
 
         
@@ -90,7 +91,7 @@ class DevshopEnv(gym.Env):
 
     def reset(self):
         self.current_step = 0
-        
+        self.lastInboxStoryCount=0
 
         client = DevshopClient()
         client.doReset()
