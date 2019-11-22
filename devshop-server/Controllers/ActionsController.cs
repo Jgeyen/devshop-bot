@@ -23,20 +23,20 @@ namespace devshop_server.Controllers {
         [HttpPost]
         [Route("FounderDoBaWork")]
         public IActionResult FounderDoBaWork() {
-            _actions.FounderDoBaWork();
-            return Ok();
+            var result = _actions.FounderDoBaWork();
+            return Ok(result);
         }
         [HttpPost]
         [Route("FounderDoDevWork")]
         public IActionResult FounderDoDevWork() {
-            _actions.FounderDoDevWork();
-            return Ok();
+            var result = _actions.FounderDoDevWork();
+            return Ok(result);
         }
         [HttpPost]
         [Route("FounderDoTestWork")]
         public IActionResult FounderDoTestWork() {
-            _actions.FounderDoTestWork();
-            return Ok();
+            var result = _actions.FounderDoTestWork();
+            return Ok(result);
         }
         [HttpPost]
         [Route("DoBaWork")]

@@ -35,17 +35,18 @@ class DevshopEnv(gym.Env):
         #               (HEIGHT, WIDTH, N_CHANNELS), dtype=np.uint8)
 
         self.observation_space =  spaces.Box(low=0, high=1, shape=(7,), dtype=np.float32)
+        self.lastBanks = []
 
     def _take_action(self, action):
         print(f'Step: {self.current_step}')
 
         #call the api to get the action to occur
         client = DevshopClient()
-        client.doAction(action)
+        return client.doAction(action)
 
     def step(self, action):
         # Execute one time step within the environment
-        self._take_action(action)
+        didAction = self._take_action(action)
 
         self.current_step += 1
 
@@ -53,6 +54,14 @@ class DevshopEnv(gym.Env):
 
         client = DevshopClient()
         state = client.getState()
+        self.actionReward = 0
+        if didAction:
+            if action ==1:
+                self.actionReward = 1
+            if action ==2:
+                self.actionReward = 10
+            if action == 3:
+                self.actionReward = 100
         self.bank = state.bank
         self.inboxStoryCount = state.inboxStoryCount
         self.backlogStoryCount = state.backlogStoryCount
@@ -61,9 +70,11 @@ class DevshopEnv(gym.Env):
         self.doneStoryCount = state.doneStoryCount
         self.founderFree = state.founderFree
         self.newProjectCost = state.newProjectCost
+        
+        # self.lastBanks.append(self.bank)
+        reward = self.actionReward
 
-        reward = (self.bank + 1000) 
-        done = self.bank + 1000 <= 0 #discreet space can't handle negative, 1000 is going to be our y intercept
+        done = self.bank + 10000 <= 0 #discreet space can't handle negative, 1000 is going to be our y intercept
 
         
 
@@ -74,11 +85,13 @@ class DevshopEnv(gym.Env):
                 self.doneStoryCount/100,
                 self.founderFree,
                 self.newProjectCost/100))
-
+        print(f"Reward: {reward}")
         return obs, reward, done, {}
 
     def reset(self):
         self.current_step = 0
+        
+
         client = DevshopClient()
         client.doReset()
 
