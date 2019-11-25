@@ -17,7 +17,7 @@ namespace devshop_server.Controllers {
         [Route("AddProject")]
         public IActionResult AddProject() {
             _actions.AddProject();
-            return Ok();
+            return Ok(true);
         }
         
         [HttpPost]

@@ -86,10 +86,12 @@ namespace devshop_server {
             _workers = workers;
             _board = board;
             _store = store;
+            
         }
 
         public void UpdateState() {
             var start = DateTime.Now;
+            if(_workers.Workers.Count() == 0) UpdateWorkerInformation();
             InboxStoryCount = _board.InboxStoryCount;
             BacklogStoryCount = _board.BacklogStoryCount;
             DevStoryCount = _board.DevStoryCount;

@@ -33,7 +33,9 @@ namespace devshop_server {
             return WorkerDoWork(WorkerTypes.founder, StoryTypes.dev);
         }
         public bool FounderDoTestWork() {
-            return WorkerDoWork(WorkerTypes.founder, StoryTypes.test);
+            var outcome = WorkerDoWork(WorkerTypes.founder, StoryTypes.test);
+            if(outcome) _board.IncrementDoneCount();
+            return outcome;
         }
         public bool FounderDoBaWork() {
             return WorkerDoWork(WorkerTypes.founder, StoryTypes.ba);

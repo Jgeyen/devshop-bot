@@ -8,10 +8,12 @@ namespace devshop_server.Controllers {
     public class GameController : ControllerBase {
         private readonly ILogger<StateController> _logger;
         private IStore _store;
+        private readonly IKanbanBoard _board;
 
-        public GameController(ILogger<StateController> logger, IStore store) {
+        public GameController(ILogger<StateController> logger, IStore store, IKanbanBoard board) {
             _logger = logger;
             _store = store;
+            this._board = board;
         }
 
 
@@ -19,6 +21,7 @@ namespace devshop_server.Controllers {
         [Route("Reset")]
         public ActionResult Reset() {
             _store.ResetGame();
+            _board.ResetBoard();
             Thread.Sleep(1000);
             return Ok();
         }

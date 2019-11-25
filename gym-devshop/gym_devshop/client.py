@@ -58,7 +58,9 @@ class DevshopClient():
 
 
     def doAction(self, action):
-        actions = ["AddProject",
+
+        actions = ["",
+                    "AddProject",
                    "FounderDoBaWork",
                    "FounderDoDevWork",
                    "FounderDoTestWork",
@@ -74,6 +76,5 @@ class DevshopClient():
         actionToPerform = api_url_base + "actions/"+actions[action]
 
         response = requests.post(actionToPerform, json="{}", verify=False)
-        print("Response: {} For action: {}".format(
-            response.status_code, actions[action]))
+        # print(f"Response: {response.status_code} For action: {actions[action]}")
         return response.content
